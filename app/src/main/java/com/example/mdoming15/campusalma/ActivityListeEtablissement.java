@@ -21,6 +21,7 @@ public class ActivityListeEtablissement extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_etablissement);
 
@@ -29,10 +30,10 @@ public class ActivityListeEtablissement extends AppCompatActivity {
 
         ListView listeView = (ListView) findViewById(R.id.etablissements_ListView);
         Intent intent = getIntent();
-        int methode = intent.getExtras().getInt("Methode");
-        Cursor cursor ;
 
-        Log.i("TEST du int methode : ", Integer.toString(methode));
+        final int  methode = intent.getExtras().getInt("Methode");
+
+        Cursor cursor ;
 
         switch (methode){
             case 0: cursor = daoManager.getAllSnack();
@@ -55,20 +56,16 @@ public class ActivityListeEtablissement extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Cursor curs = (Cursor)parent.getItemAtPosition(position);
+                Cursor curs = (Cursor) parent.getItemAtPosition(position);
                 Etablissement etablissement = DAO.getEtablissementFromCursor(curs);
 
-                Intent intent = new Intent(ActivityListeEtablissement.this,Details_etablissement.class);
+                Intent intent = new Intent(ActivityListeEtablissement.this, Details_etablissement.class);
                 intent.putExtra("Etablissement", etablissement);
+                intent.putExtra("Methode", methode);
                 startActivity(intent);
             }
         });
 
-        //EtablissementCursorAdapter etablissementCursorAdapter =
-        //joueursListView.setAdapter(joueursAdapter);
-        //joueursListView.setOnItemClickListener(mJoueurClickedHandler);
-        // Indique que le fragment a un option menu
-        //setHasOptionsMenu(true);
     }
 
     @Override
@@ -92,4 +89,5 @@ public class ActivityListeEtablissement extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -27,8 +27,7 @@
         <activity
             android:name=".Details_etablissement"
             android:label="@string/title_activity_details_etablissement"
-            android:parentActivityName=".ActivityListeEtablissement"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:parentActivityName=".ActivityListeEtablissement">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mdoming15.campusalma.ActivityListeEtablissement" />
