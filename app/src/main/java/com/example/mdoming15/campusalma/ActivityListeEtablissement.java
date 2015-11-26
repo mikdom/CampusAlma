@@ -66,6 +66,8 @@ public class ActivityListeEtablissement extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     @Override

@@ -27,10 +27,19 @@
         <activity
             android:name=".Details_etablissement"
             android:label="@string/title_activity_details_etablissement"
-            android:parentActivityName=".ActivityListeEtablissement">
+            android:parentActivityName=".ActivityListeEtablissement" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mdoming15.campusalma.ActivityListeEtablissement" />
+        </activity>
+        <activity
+            android:name=".Commentaires"
+            android:label="@string/title_activity_commentaires"
+            android:parentActivityName=".Details_etablissement"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mdoming15.campusalma.Details_etablissement" />
         </activity>
     </application>
 

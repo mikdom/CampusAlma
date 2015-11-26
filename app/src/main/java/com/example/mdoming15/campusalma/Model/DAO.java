@@ -34,6 +34,12 @@ public class DAO {
         }
     }
 
+    public void close(){
+        mDB.close();
+    }
+
+    //---Etablissement Methodes --------------------------------------------------------------------
+
     public static Etablissement getEtablissementFromCursor(Cursor cursor){
 
         if (cursor == null || cursor.getCount() == 0){
@@ -57,25 +63,17 @@ public class DAO {
     }
 
     public Cursor getAllSnack(){
-        return mDB.rawQuery("SELECT * FROM etablissements WHERE type = 1 ", null );
+        return mDB.rawQuery("SELECT * FROM etablissements WHERE type = ? ", new String[] {"1"} );
     }
 
     public Cursor getAllRestaurant(){
 
-        return mDB.rawQuery("SELECT * FROM etablissements WHERE type = 0 ", null );
+        return mDB.rawQuery("SELECT * FROM etablissements WHERE type = ? ", new String[] {"0"} );
     }
 
     public Cursor getAllFavoris(){
 
-        return mDB.rawQuery("SELECT * FROM etablissements WHERE favoris = 1 ", null );
-    }
-
-
-
-
-
-    public void close(){
-        mDB.close();
+        return mDB.rawQuery("SELECT * FROM etablissements WHERE favoris = ? ", new String[] {"1"} );
     }
 
     public void insertEtablissement(Etablissement etablissement){
@@ -93,6 +91,7 @@ public class DAO {
 
     public void updateEtablissement(Etablissement etablissement){
         ContentValues valeurs = new ContentValues();
+        valeurs.put("_id", etablissement.getId());
         valeurs.put("nom", etablissement.getNom());
         valeurs.put("type", etablissement.getType());
         valeurs.put("adresse",etablissement.getAdresse());
@@ -101,6 +100,48 @@ public class DAO {
         valeurs.put("favoris", etablissement.getFavoris());
 
         mDB.update("etablissements", valeurs
-                , "nom" + "='" + etablissement.getNom() + "'", null);
+                , "_id" + "='" + etablissement.getId() + "'", null);
     }
+
+
+    //---Commentaires Methodes ---------------------------------------------------------------------
+
+    public static Commentaire getCommentaireFromCursor(Cursor cursor){
+
+        if (cursor == null || cursor.getCount() == 0){
+            return null;
+        }
+
+        int id = cursor.getInt(cursor.getColumnIndex("_id"));
+        String texte = cursor.getString(cursor.getColumnIndex("texte"));
+        int etablissement_id = cursor.getInt(cursor.getColumnIndex("etablissement"));
+
+        return new Commentaire(id , texte , etablissement_id);
+    }
+
+    public Cursor getAllCommentairesFromEtablissement(int etablissement_id){
+
+        return mDB.rawQuery("SELECT * FROM commentaires WHERE etablissement = ? ", new String[] {""+etablissement_id} );
+    }
+
+    public void insertCommentaire(Commentaire commentaire){
+
+        ContentValues valeurs = new ContentValues();
+        valeurs.put("texte", commentaire.getTexte());
+        valeurs.put("etablissement", commentaire.getId_etablissement());
+
+        mDB.insert("commentaires", null, valeurs);
+    }
+
+    public void updateCommentaire(Commentaire commentaire){
+        ContentValues valeurs = new ContentValues();
+        valeurs.put("_id", commentaire.getId());
+        valeurs.put("texte", commentaire.getTexte());
+        valeurs.put("etablissement",commentaire.getId_etablissement());
+
+
+        mDB.update("commentaires", valeurs
+                , "_id" + "='" + commentaire.getId() + "'", null);
+    }
+
 }

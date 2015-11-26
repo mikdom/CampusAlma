@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.mdoming15.campusalma.Model.Commentaire;
 import com.example.mdoming15.campusalma.Model.DAO;
 import com.example.mdoming15.campusalma.Model.Etablissement;
 
@@ -83,6 +84,21 @@ public class Details_etablissement extends AppCompatActivity {
 
         ImageView imageGMap = (ImageView) findViewById(R.id.detail_image_googleMap);
         imageGMap.setImageResource(R.drawable.google_maps);
+
+        TextView menuE = (TextView) findViewById(R.id.detail_menu_etablissement);
+        menuE.setText("Menu");
+
+        TextView commentaireE = (TextView) findViewById(R.id.detail_commentaire_etablissement);
+        commentaireE.setText("Commentaires");
+        commentaireE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intentCommentaire = new Intent(Details_etablissement.this, Commentaires.class);
+                intentCommentaire.putExtra("Etablissement_id", etablissement.getId());
+                startActivity(intentCommentaire);
+            }
+        });
 
     }
 
