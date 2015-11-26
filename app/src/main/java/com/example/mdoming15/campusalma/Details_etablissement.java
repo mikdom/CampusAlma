@@ -3,10 +3,7 @@ package com.example.mdoming15.campusalma;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,11 +12,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.mdoming15.campusalma.Model.Commentaire;
 import com.example.mdoming15.campusalma.Model.DAO;
 import com.example.mdoming15.campusalma.Model.Etablissement;
-
-import static com.example.mdoming15.campusalma.R.drawable.resto_test;
 
 public class Details_etablissement extends AppCompatActivity {
 
@@ -89,12 +83,12 @@ public class Details_etablissement extends AppCompatActivity {
         menuE.setText("Menu");
 
         TextView commentaireE = (TextView) findViewById(R.id.detail_commentaire_etablissement);
-        commentaireE.setText("Commentaires");
+        commentaireE.setText("Mes commentaires");
         commentaireE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intentCommentaire = new Intent(Details_etablissement.this, Commentaires.class);
+                Intent intentCommentaire = new Intent(Details_etablissement.this, ActivityListeCommentaires.class);
                 intentCommentaire.putExtra("Etablissement_id", etablissement.getId());
                 startActivity(intentCommentaire);
             }

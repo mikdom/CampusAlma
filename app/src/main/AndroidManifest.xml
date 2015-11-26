@@ -33,7 +33,7 @@
                 android:value="com.example.mdoming15.campusalma.ActivityListeEtablissement" />
         </activity>
         <activity
-            android:name=".Commentaires"
+            android:name=".ActivityListeCommentaires"
             android:label="@string/title_activity_commentaires"
             android:parentActivityName=".Details_etablissement"
             android:theme="@style/AppTheme.NoActionBar" >
